@@ -142,11 +142,15 @@
 
 /* Form Component */
 .form_textarea {
-    @apply w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-500 outline-0;
+    @apply w-full flex rounded-lg h-[200px] mt-2 p-3 text-base text-gray-500 outline-0;
 }
 
 .form_input {
     @apply w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0;
+}
+
+.form_submit {
+    @apply px-5 py-1.5 bg-primary-orange rounded-full text-white hover:bg-white hover:text-primary-orange hover:border-primary-orange border-[0.5px] transition-all duration-200
 }
 
 /* Nav Component */
