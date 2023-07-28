@@ -6,10 +6,12 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
       <h1 className="head_text text-left">
         <span className="blue_gradient">{type} Post</span>
       </h1>
+
       <p className="desc text-left max-w-md">
         {type} prompts to share with other users and let AI open up your
         imagination!
       </p>
+
       <form
         onSubmit={handleSubmit}
         className="mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism"
