@@ -4,7 +4,22 @@ import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
 
 const PromptCardList = ({ data, handleTagClick }) => {
-  <div className="mt-16 prompt_layout"></div>;
+  return (
+    <div className="mt-16 prompt_layout">
+      {data.map((prompt) => {
+        return (
+          <>
+            {console.log(prompt._id)}
+            <PromptCard
+              key={prompt._id}
+              prompt={prompt}
+              handleTagClick={handleTagClick}
+            />
+          </>
+        );
+      })}
+    </div>
+  );
 };
 
 const Feed = () => {
@@ -13,14 +28,17 @@ const Feed = () => {
 
   const handleSearchChange = (e) => {};
 
+  const fetchPrompts = async () => {
+    const response = await fetch("/api/prompt");
+    const data = await response.json();
+    setPosts(data);
+  };
+  //blah
   useEffect(() => {
-    const fetchPrompts = async () => {
-      const response = await fetch("/api/prompt");
-      const data = await response.json();
-      setPosts(data);
-    };
     fetchPrompts();
   }, []);
+
+  //console.log(posts);
   return (
     <section className="feed">
       <form className="relative w-full flex-center">
