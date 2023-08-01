@@ -29,7 +29,7 @@ const montreal = localfont({
 
 const RootLayout = ({ children }) => {
   return (
-    <html lang="en" className={`${montreal.variable} font-montreal`}>
+    <html lang="en" className={`${montreal.variable} font-montreal tracking-wide`}>
       <body>
         <Provider>
           <div className="main">
