@@ -11,20 +11,21 @@ const MyProfile = () => {
 
   const [posts, setPosts] = useState("");
 
-  const fetchPrompts = async () => {
-    const response = await fetch(`/api/users/${session?.user.id}/posts`);
-    const data = await response.json();
-    setPosts(data);
-  };
-
   useEffect(() => {
-    if (session?.user.id) {
-      fetchPrompts();
-    }
-  }, []);
+    const fetchPrompts = async () => {
+      const response = await fetch(`/api/users/${session?.user.id}/posts`);
+      const data = await response.json();
+      setPosts(data);
+    };
+   if (session?.user.id) {
+    fetchPrompts();
+   }
+  }, [session?.user.id]);
+
   const handleEdit = () => {};
 
   const handleDelete = async () => {};
+
   return (
     <Profile
       name="My"
