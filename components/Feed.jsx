@@ -32,12 +32,11 @@ const Feed = () => {
     const data = await response.json();
     setPosts(data);
   };
-  //blah
+
   useEffect(() => {
     fetchPrompts();
   }, []);
 
-  //console.log(posts);
   return (
     <section className="feed">
       <form className="relative w-full flex-center">

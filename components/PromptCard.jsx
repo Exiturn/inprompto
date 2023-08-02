@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
-const PromptCard = ({ prompt, handleTagClick, hanldeEdit, handleDelete }) => {
+const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
   const [copied, setCopied] = useState("");
 
   const handleCopy = () => {
