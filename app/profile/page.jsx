@@ -8,7 +8,7 @@ import Profile from "@components/Profile";
 
 const MyProfile = () => {
   const { data: session } = useSession();
-
+  const router = useRouter();
   const [posts, setPosts] = useState("");
 
   useEffect(() => {
@@ -22,9 +22,11 @@ const MyProfile = () => {
    }
   }, [session?.user.id]);
 
-  const handleEdit = () => {};
+  const handleEdit = (prompt) => {
+    router.push(`/update-prompt?id=${prompt._id}`)
+  };
 
-  const handleDelete = async () => {};
+  const handleDelete = async (prompt) => {};
 
   return (
     <Profile
