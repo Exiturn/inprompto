@@ -21,20 +21,25 @@ export const GET = async (req, { params }) => {
 };
 // PATCH
 export const PATCH = async (request, { params }) => {
-  const { prompt, tag } = await request.JSON();
+  const { prompt, tag } = await request.json();
 
   try {
     await connectToDB();
+
     const updatedPrompt = await Prompt.findById(params.id);
-    if (!updatedPrompt)
+
+    if (!updatedPrompt) {
       return new Response("Prompt not found.", {
         status: 404,
       });
+    }
+
     updatedPrompt.prompt = prompt;
     updatedPrompt.tag = tag;
 
     await updatedPrompt.save();
-    return new Response(JSON.stringify(updatedPrompt), {
+
+    return new Response("Succesfully updated the prompt", {
       status: 200,
     });
   } catch (error) {
