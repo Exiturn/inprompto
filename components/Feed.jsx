@@ -32,17 +32,17 @@ const Feed = () => {
 
   const handleTagClick = (tag) => {
     setFilterTag(tag);
-    setFilterOn(true);
-    
 
     if (tag === filterTag) {
       setPosts(unfilteredPosts);
-      setFilterOn(!filterOn);
+      setFilterTag("");
+      setFilterOn(false);
     }
     else {
+      setFilterOn(true);
       const filteredPrompts = posts.filter((post) => post.tag.includes(tag));
       setPosts(filteredPrompts);
-      setFilterOn(!filterOn);
+      setFilterOn(true);
     }
   };
 
@@ -70,7 +70,7 @@ const Feed = () => {
         />
       </form>
       {filterOn ? (
-        <h1 className="mt-16">Showing posts related to {filterTag}</h1>
+        <h1 className="mt-16 tag_header text-black">Showing posts related to <span className="font-medium">{filterTag}</span></h1>
       ) : (
         ""
       )}
