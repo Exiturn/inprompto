@@ -1,9 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 import PromptCard from "./PromptCard";
 
-const PromptCardList = ({ data, handleTagClick }) => {
+const PromptCardList = ({ data, handleTagClick, handleProfileClick }) => {
   return (
     <div className="mt-4 prompt_layout">
       {data.map((prompt, key) => {
@@ -13,6 +14,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
               key={prompt._id}
               prompt={prompt}
               handleTagClick={handleTagClick}
+              handleProfileClick={handleProfileClick}
             />
           </div>
         );
@@ -22,6 +24,8 @@ const PromptCardList = ({ data, handleTagClick }) => {
 };
 
 const Feed = () => {
+  const router = useRouter();
+
   const [posts, setPosts] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
@@ -36,15 +40,6 @@ const Feed = () => {
       filterPrompts(tagName);
     }
   };
-
-  const filterPrompts = (searchtext) => {
-    console.log(posts)
-    const filteredPrompts = posts.filter(
-      (item) => item.tag.includes(searchtext) || item.creator.username.includes(searchtext)
-    );
-    setSearchedResults(filteredPrompts);
-  };
-
   const handleSearchChange = (e) => {
     clearTimeout(searchTimeout);
     setSearchText(e.target.value);
@@ -54,6 +49,19 @@ const Feed = () => {
         filterPrompts(e.target.value);
       }, 500)
     );
+  };
+
+  const handleProfileClick = (profileId) => {
+    router.push(`/profile/${profileId}`);
+  }
+
+  const filterPrompts = (searchtext) => {
+    const filteredPrompts = posts.filter(
+      (item) =>
+        item.tag.includes(searchtext) ||
+        item.creator.username.includes(searchtext)
+    );
+    setSearchedResults(filteredPrompts);
   };
 
   const fetchPrompts = async () => {
@@ -87,10 +95,11 @@ const Feed = () => {
           <PromptCardList
             data={searchedResults}
             handleTagClick={handleTagClick}
+            handleProfileClick={handleProfileClick}
           />
         </>
       ) : (
-        <PromptCardList data={posts} handleTagClick={handleTagClick} />
+        <PromptCardList data={posts} handleTagClick={handleTagClick} handleProfileClick={handleProfileClick} />
       )}
     </section>
   );
