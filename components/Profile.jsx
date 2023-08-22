@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import PromptCard from "./PromptCard";
 import { useSession } from "next-auth/react";
@@ -8,13 +8,20 @@ const Profile = ({ name, desc, data, handleEdit, handleDelete, userId }) => {
   const { data: session } = useSession();
 
   useEffect(() => {
-   console.log(session)
+    console.log(session);
+    console.log("data: ", data);
+    console.log("session?.user._id: ", session?.user.id);
+    console.log("userId: ", userId)
   }, []);
 
   return (
     <section className="w-full">
       <h1 className="head_text text-left">
-        <span className="blue_gradient capitalize">{name}'s Profile</span>
+        {session?.user.id !== userId ? (
+          <span className="blue_gradient capitalize">{name} Profile</span>
+        ) : (
+          ""
+        )}
       </h1>
       <p className="desc text-left">{desc}</p>
       {!data ? (
@@ -26,7 +33,7 @@ const Profile = ({ name, desc, data, handleEdit, handleDelete, userId }) => {
       ) : (
         ""
       )}
-      
+
       {session?.user.id ? <div className="mt-16 tag_header"></div> : ""}
       <div className="mt-10 prompt_layout">
         {data ? (

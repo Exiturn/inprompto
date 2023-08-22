@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 import PromptCard from "./PromptCard";
 
@@ -25,6 +26,7 @@ const PromptCardList = ({ data, handleTagClick, handleProfileClick }) => {
 
 const Feed = () => {
   const router = useRouter();
+  const { data: session } = useSession();
 
   const [posts, setPosts] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -52,7 +54,11 @@ const Feed = () => {
   };
 
   const handleProfileClick = (profileId) => {
-    router.push(`/profile/${profileId}`);
+    if (profileId === session?.user.id) {
+      router.push(`/profile`)
+    } else {
+      router.push(`/profile/${profileId}`);
+    }
   }
 
   const filterPrompts = (searchtext) => {
